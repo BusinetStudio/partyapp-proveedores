@@ -11,23 +11,46 @@ export default class PendingDetails extends Component {
     header: null,
   };
   render() {  
+    const { navigation } = this.props;
+    const eventName = navigation.getParam('eventName', '');
+    const eventType = navigation.getParam('eventType', '');
+    const eventGuest = navigation.getParam('eventGuest','');
+    const eventDate = navigation.getParam('eventDate','');
+    const eventHour = navigation.getParam('eventHour','');
+    const eventLocation = navigation.getParam('eventLocation','');
+    const eventAnimationTime= navigation.getParam('eventAnimationTime','');
+    const eventDescription= navigation.getParam('eventDescription','');
+    const eventQuantity= navigation.getParam('eventQuantity','');
+    const eventApproximateCost= navigation.getParam('eventApproximateCost','');
+    const eventAnimationDescription= navigation.getParam('eventAnimationDescription','');
+    //const otherParam = navigation.getParam('otherParam', 'some default value');
+
     return (
       <View>
-        <HeaderTop></HeaderTop>
+        <HeaderTop {...this.props} menu={false} ></HeaderTop>
         <ScrollView>
           <View style={{marginBottom:40}}>
-            <Text style={[styles.Title, {marginBottom:20}]}>Nombre del evento</Text>
-            <Text style={styles.EventTitle}>Baby Shower</Text>
-            <Text style={[styles.EventDescription, {fontWeight: '400'}]}>Invitados:</Text>
-            < Icon name='calendar' style={styles.EventDescription}/>
+            <Text style={[styles.Title, {marginBottom:20}]}>{eventName}</Text>
+            <Text style={styles.EventTitle}>{eventType}</Text>
+            <Text style={[styles.EventDescription, {fontWeight: '400'}]}>Invitados:{eventGuest}</Text>
+            <Text style={styles.EventDescription}>
+              < Icon name='calendar'style={styles.EventDescription}/> 
+              {eventDate}
+            </Text>
+            <Text style={styles.EventDescription}>
             < Icon name='clock-o' style={styles.EventDescription}/>
+              {eventHour}
+            </Text>
+            <Text style={styles.EventDescription}>
             < Icon name='map-marker' style={[styles.EventDescription, {marginLeft:37}]}/>
+              {eventLocation}
+            </Text>
           </View>
           <View>
             <Text style={styles.EventTitle}>Animación</Text>
-            <Text style={styles.EventDescription}>Duración:</Text>
+            <Text style={styles.EventDescription}>Duración: {eventAnimationTime}</Text>
             <Text style={styles.EventDescription}>Descripción:</Text>
-            <Text style={styles.EventDescriptionParagraf}>Lorem Ipsum es un texto de marcador de posición comúnmente utilizado en las industrias gráficas, gráficas y editoriales para previsualizar diseños y maquetas visuales.</Text>
+            <Text style={styles.EventDescriptionParagraf}>{eventDescription}</Text>
           </View>
           <View>
           <Text style={styles.EventDescriptionCosto}>Costo</Text>
@@ -41,10 +64,10 @@ export default class PendingDetails extends Component {
           <View style={styles.EventBorderLine}/>
           <View>
             <Text style={styles.EventTitle}>Recuerdos</Text>
-            <Text style={styles.EventDescription}>Cantidad:</Text>
-            <Text style={styles.EventDescription}>Costo aproximado:</Text>
+            <Text style={styles.EventDescription}>Cantidad: {eventQuantity}</Text>
+            <Text style={styles.EventDescription}>Costo aproximado: {eventApproximateCost}</Text>
             <Text style={styles.EventDescription}>Descripción:</Text>
-            <Text style={styles.EventDescriptionParagraf}>Lorem Ipsum es un texto de marcador de posición comúnmente utilizado en las industrias gráficas, gráficas y editoriales para previsualizar diseños y maquetas visuales.</Text>
+            <Text style={styles.EventDescriptionParagraf}>{eventAnimationDescription}</Text>
           </View>
           <View>
             <Text style={styles.EventDescriptionCosto}>Costo</Text>

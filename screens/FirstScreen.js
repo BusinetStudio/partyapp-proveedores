@@ -7,78 +7,86 @@ import EventItems from'../screens/EventItem';
 import styles from '../styles/styles';
 
 
+
 const data = [{
 
   "eventName":"Cumplea;os 31 de Franklin",
+  "eventGuest":"5",
   "eventType":"Fiesta de Adultos",
-  "eventDate":"24/08/2019",
-  "eventHour":"18:00",
-  "eventLocation":"Montielco"
+  "eventDate":"  24/08/2019",
+  "eventHour":"  18:00",
+  "eventLocation":"   Montielco",
+  "eventAnimationTime":"  5 hrs",
+  "eventDescription":"  Lorem Ipsum es un texto de marcador de posición comúnmente utilizado en las industrias gráficas, gráficas y editoriales para previsualizar diseños y maquetas visuales.",
+  "eventQuantity":"  50",
+  "eventApproximateCost":"  60$",
+  "eventAnimationDescription":"  Lorem Ipsum es un texto de marcador de posición comúnmente utilizado en las industrias gráficas.",
+
 },
  { "eventName":"Bautizo Carol ",
   "eventType":"Misa",
   "eventDate":"24/08/2019",
   "eventHour":"08:00",
-  "eventLocation":"Las Lomas"
+  "eventLocation":"Las Lomas",
+  "eventAnimationTime":"  5 hrs",
+  "eventDescription":"  Lorem Ipsum es un texto de marcador de posición comúnmente utilizado en las industrias gráficas, gráficas y editoriales para previsualizar diseños y maquetas visuales.",
+  "eventQuantity":"  50",
+  "eventApproximateCost":"  60$",
+  "eventAnimationDescription":"  Lorem Ipsum es un texto de marcador de posición comúnmente utilizado en las industrias gráficas.",
 },{
 
   "eventName":"Cumplea;os 31 de Franklin1",
   "eventType":"Fiesta de Adultos",
   "eventDate":"24/08/2019",
   "eventHour":"18:00",
-  "eventLocation":"Montielco"
+  "eventLocation":"Montielco",
+  "eventAnimationTime":"  5 hrs",
+  "eventDescription":"  Lorem Ipsum es un texto de marcador de posición comúnmente utilizado en las industrias gráficas, gráficas y editoriales para previsualizar diseños y maquetas visuales.",
+  "eventQuantity":"  50",
+  "eventApproximateCost":"  60$",
+  "eventAnimationDescription":"  Lorem Ipsum es un texto de marcador de posición comúnmente utilizado en las industrias gráficas.",
+
 },
  { "eventName":"Bautizo Carol1",
   "eventType":"Misa",
   "eventDate":"24/08/2019",
   "eventHour":"08:00",
-  "eventLocation":"Las Lomas"
+  "eventLocation":"Las Lomas",
+  "eventAnimationTime":"  5 hrs",
+  "eventDescription":"  Lorem Ipsum es un texto de marcador de posición comúnmente utilizado en las industrias gráficas, gráficas y editoriales para previsualizar diseños y maquetas visuales.",
+  "eventQuantity":"  50",
+  "eventApproximateCost":"  60$",
+  "eventAnimationDescription":"  Lorem Ipsum es un texto de marcador de posición comúnmente utilizado en las industrias gráficas.",
 },{
 
   "eventName":"Cumplea;os 31 de Franklin2",
   "eventType":"Fiesta de Adultos",
   "eventDate":"24/08/2019",
   "eventHour":"18:00",
-  "eventLocation":"Montielco"
+  "eventLocation":"Montielco",
+  "eventAnimationTime":"  5 hrs",
+  "eventDescription":"  Lorem Ipsum es un texto de marcador de posición comúnmente utilizado en las industrias gráficas, gráficas y editoriales para previsualizar diseños y maquetas visuales.",
+  "eventQuantity":"  50",
+  "eventApproximateCost":"  60$",
+  "eventAnimationDescription":"  Lorem Ipsum es un texto de marcador de posición comúnmente utilizado en las industrias gráficas.",
 },
  { "eventName":"Bautizo Carol2",
   "eventType":"Misa",
   "eventDate":"24/08/2019",
   "eventHour":"08:00",
-  "eventLocation":"Las Lomas"
-},{
-
-  "eventName":"Cumplea;os 31 de Franklin3",
-  "eventType":"Fiesta de Adultos",
-  "eventDate":"24/08/2019",
-  "eventHour":"18:00",
-  "eventLocation":"Montielco"
-},
- { "eventName":"Bautizo Carol Cristina3",
-  "eventType":"Misa",
-  "eventDate":"24/08/2019",
-  "eventHour":"08:00",
-  "eventLocation":"Las Lomas"
-},{
-
-  "eventName":"Cumplea;os 31 de Franklin4",
-  "eventType":"Fiesta de Adultos",
-  "eventDate":"24/08/2019",
-  "eventHour":"18:00",
-  "eventLocation":"Montielco"
-},
- { "eventName":"Bautizo Carol Cristina4",
-  "eventType":"Misa",
-  "eventDate":"24/08/2019",
-  "eventHour":"08:00",
-  "eventLocation":"Las Lomas"
+  "eventLocation":"Las Lomas",
+  "eventAnimationTime":"  5 hrs",
+  "eventDescription":"  Lorem Ipsum es un texto de marcador de posición comúnmente utilizado en las industrias gráficas, gráficas y editoriales para previsualizar diseños y maquetas visuales.",
+  "eventQuantity":"  50",
+  "eventApproximateCost":"  60$",
+  "eventAnimationDescription":"  Lorem Ipsum es un texto de marcador de posición comúnmente utilizado en las industrias gráficas.",
 }]
 
 export default class FirstScreen extends Component {
 
   constructor(props){
     super(props)
-    this.onPressDetail = this.onPressDetail.bind(this)
+    //this.onPressDetail = this.onPressDetail.bind(this)
   }
 
    _keyExtractor = (item, index) => item.eventName;
@@ -88,20 +96,15 @@ export default class FirstScreen extends Component {
       <View style={{borderWidth:1,borderColor:"#e9e9e9", marginTop: -25}}></View>
     )}
 
-    onPressDetail() {
-      this.props.navigation.navigate('Pending')
-    }
 
   render (){
     return (
       <View style={{marginBottom:100}}>
-        <HeaderTop></HeaderTop>
+        <HeaderTop {...this.props} menu={true} ></HeaderTop>
         <Text style={styles.Title}>Listado de solicitudes</Text>
         <FlatList
             data={data}
-            renderItem={({item}) => <EventItems eventName={item.eventName} eventType={item.eventType}
-            eventDate={item.eventDate} eventHour={item.eventHour} eventLocation={item.eventLocation} 
-            onPress={this.onPressDetail}/>}
+            renderItem={({item}) => <EventItems {...this.props} event={item} onPress={'First'}/>}
             keyExtractor={this._keyExtractor}
             ItemSeparatorComponent={this.separator}
           />
