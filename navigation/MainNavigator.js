@@ -8,7 +8,14 @@ import LoginScreen from '../screens/LoginScreen'
 import HomeScreen from '../screens/HomeScreen'
 import RegisterScreen from '../screens/RegisterScreen'
 import ActualizarEmpresaScreen from '../screens/ActualizarEmpresaScreen'
+import PendingDetails from '../screens/PendingDetailsScreen';
+import AcepteDetails from '../screens/AcepteDetailsScreen';
+import CambiarContrasenaScreen from '../screens/CambiarContrasenaScreen';
 import Tabs from './TabNavigator';  //Tab Nav
+import PreguntasFrecuenteScreen from '../screens/PreguntasFrecuenteScreen';
+import TerminosCondicioneScreen from '../screens/TerminosCondicioneScreen';
+import SoporteScreen from '../screens/SoporteScreen';
+
 
 //authentication stack for use before login
 export const AuthStack =  createStackNavigator({
@@ -41,6 +48,42 @@ export const MainStack =  createDrawerNavigator({
   },
   ActualizarEmpresa:{
     screen:ActualizarEmpresaScreen,
+    navigationOptions:{
+      header:null
+    }
+  },
+  CambiarContrasena:{
+    screen: CambiarContrasenaScreen,
+    navigationOptions: {
+      header:null
+    }
+  },
+  Pending:{
+    screen: PendingDetails,
+    navigationOptions:{
+      header:null
+    }
+  },
+  Acepte:{
+    screen: AcepteDetails,
+    navigationOptions:{
+      header:null
+    }
+  },
+  PreguntasFrecuentes:{
+    screen:PreguntasFrecuenteScreen,
+    navigationOptions:{
+      header:null
+    }
+  },
+  Soporte:{
+    screen:SoporteScreen,
+    navigationOptions:{
+      header:null
+    }
+  },
+  TerminosCondiciones:{
+    screen:TerminosCondicioneScreen,
     navigationOptions:{
       header:null
     }

@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, StatusBar , Platform } from 'react-native';
+
 export default StyleSheet.create({
       
       //HomeScreen
@@ -23,9 +24,10 @@ export default StyleSheet.create({
         //RegisterScreen //LoginScreen
     loginContainer: { 
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         flexDirection: 'column',
-        alignItems: 'stretch'
+        alignItems: 'stretch',
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
     },
     
     inputElement: {
@@ -39,39 +41,39 @@ export default StyleSheet.create({
     },
       //Button, TextButoon, Title and SubTitle.
     Title:{
-        fontSize: 30,
+        fontSize: 20,
         fontWeight: '700',
         textAlign: 'center',
         color:'#8F4D93',
         marginTop:20,
-        marginBottom:10
+        marginBottom:20
     },
     TitleItem:{
-        fontSize: 20,
+        fontSize: 16,
         fontWeight: '700',
         textAlign: 'left',
         color:'#C63275',
         marginLeft:15,
     },
     SubTitle:{
-        fontSize: 20,
+        fontSize: 16,
         fontWeight: '700',
-        marginBottom:5,
+        marginBottom:20,
         marginLeft:35
     },
     SubTitleItem:{
         marginTop: 5,
-        fontSize: 13,
+        fontSize: 14,
         textAlign: 'left',
         color:'black',
         marginLeft:15,
     },
     DetailItem:{
-        marginTop: 5,
-        fontSize: 13,
+       // marginTop: 5,
+        fontSize: 12,
         textAlign: 'right',
         color:'black',
-        marginLeft: 35,
+        marginRight: 15,
     },
     EventTitle:{
         fontSize: 21,
@@ -120,21 +122,53 @@ export default StyleSheet.create({
     button:{
         marginBottom: 20,
         alignItems: 'center',
+        justifyContent: 'center', 
         width: 200,
         height:50,
         borderRadius: 25,
         overflow: 'hidden',
     },
     textbutton:{
-        marginTop: 14,
-        color: 'white',
-        fontWeight: 'bold',
+        //marginTop: 14,
         fontSize: 20,
+        fontWeight: '700',
+        color: '#fff',
+        textAlign:'center'
     },
     textcancelar:{
-        marginTop: 14,
         color: '#333',
-        fontWeight: 'bold',
+        fontWeight: '700',
         fontSize: 20,
+        textAlign:'center'
+  },
+
+  //menu styles
+  menuName:{
+    color: '#000',
+    padding: 10,
+    width:"100%"
+  },
+
+  menuHeader:{
+    marginTop:0,
+  },
+
+  //
+
+  questionTitle:{
+    fontSize: 14,
+    fontWeight: '700',
+    textAlign: 'left',
+    color:'#C63275',
+
+  },
+  questionDescription:{
+    fontSize:12,
+    fontWeight: '300',
+    textAlign: 'left',
+    color:'black',
+    lineHeight:20,
+    textAlign:'justify',
+    marginBottom:20
   },
 });

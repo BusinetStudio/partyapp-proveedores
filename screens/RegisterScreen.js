@@ -6,6 +6,22 @@ import styles from '../styles/styles';
 
 export default class RegisterScreen extends Component {
 
+    constructor(props)
+    {
+        super(props)
+        this.state = {
+            username: '',
+            email : '',
+            password: '',
+            repeatPassword: '',
+            fullname : '',
+            companyName :'',
+            address: '',
+            distric: '',
+            phoneNumber : ''
+        }
+    }
+
     onPressRegistrarse(){
       Alert.alert('Se ha registrado')
     }
@@ -21,26 +37,26 @@ export default class RegisterScreen extends Component {
                     <TextInput 
                         style={styles.inputElement}
                         placeholder='Usuario' 
-                        onChangeText={(text) => this.setState({username : text})}
+                        onChangeText={(username) => this.setState({username})}
                         autoCapitalize = 'none'
                     />
                     <TextInput 
                         style={styles.inputElement}
                         placeholder='Correo Electrónico' 
-                        onChangeText={(text) => this.setState({email : text})}
+                        onChangeText={(email) => this.setState({email})}
                         autoCapitalize = 'none'
                     />
                     <TextInput 
                         style={styles.inputElement}
                         placeholder='Contraseña' 
-                        onChangeText={(text) => this.setState({password1 : text})}
+                        onChangeText={(password) => this.setState({password})}
                         autoCapitalize = 'none'
                         secureTextEntry={true}
                     />
                     <TextInput 
                         style={styles.inputElement}
                         placeholder='Repetir Contraseña' 
-                        onChangeText={(text) => this.setState({password2 : text})}
+                        onChangeText={(repeatPassword) => this.setState({repeatPassword})}
                         autoCapitalize = 'none'
                         secureTextEntry={true}
                     />
@@ -48,36 +64,36 @@ export default class RegisterScreen extends Component {
                     <TextInput 
                         style={styles.inputElement}
                         placeholder='Nombre y apellido' 
-                        onChangeText={(text) => this.setState({nombreCompleto : text})}
+                        onChangeText={(fullname) => this.setState({fullname})}
                     />
                     <TextInput 
                         style={styles.inputElement}
                         placeholder='Nombre de la empresa' 
-                        onChangeText={(text) => this.setState({nombreEmpresa : text})}
+                        onChangeText={(companyName) => this.setState({companyName})}
                     />
                     <TextInput 
                         style={styles.inputElement}
                         placeholder='Dirección' 
-                        onChangeText={(text) => this.setState({direccion : text})}
+                        onChangeText={(address) => this.setState({address})}
                     />
                     <TextInput 
                         style={styles.inputElement}
                         placeholder='Distrito' 
-                        onChangeText={(text) => this.setState({distrito : text})}
+                        onChangeText={(distric) => this.setState({distric})}
                     />
                     <TextInput 
                         style={styles.inputElement}
                         placeholder='Teléfono' 
-                        onChangeText={(text) => this.setState({telefono : text})}
+                        onChangeText={(phoneNumber) => this.setState({phoneNumber})}
                     />
                 </View>
-                <View style={{marginTop:40,alignItems:'center'}}>
+                <View style={{alignItems:'center'}}>
                     <TouchableOpacity onPress={() => this.onPressRegistrarse()}>
                         <LinearGradient colors={['#8F4D93', '#C63275']} style={styles.button} start={{ x: 0, y: 1 }} end={{ x: 1, y: 1 }}>
                             <Text style={styles.textbutton}>REGISTRARSE</Text>
                         </LinearGradient>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.button]} onPress={() => this.props.navigation.navigate('Home')}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
                         <View style={[styles.button, {backgroundColor: '#E9E9E9'}]}>
                             <Text style={styles.textcancelar}>CANCELAR</Text>
                         </View>

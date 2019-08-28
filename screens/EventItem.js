@@ -54,13 +54,13 @@ export default class EventItem extends Component {
 
   render() {
     return (
-      <TouchableOpacity style={{marginTop: 20}} onPress={this.props.onPress === 'First'? this.onPressDetail : this.onPressAcepted} >
-        <View style={{flex: 1, flexDirection: 'row', width: 100, height: 100}}>
-          <View style={{width: 180, height: 50}}>
+      <TouchableOpacity onPress={this.props.onPress === 'First'? this.onPressDetail : this.onPressAcepted} >
+        <View style={{flex: 1, flexDirection: 'row', justifyContent:'space-between'}}>
+          <View style={{paddingVertical:10,}}>
             <Text style={styles.TitleItem}>{this.props.event.eventName}</Text>
             <Text style={styles.SubTitleItem}>{this.props.event.eventType}</Text>
           </View>
-          <View style={{width: 120, height: 50}}>
+          <View style={{paddingVertical:10,}}>
             <Text style={styles.DetailItem}> {this.props.event.eventDate} < Icon name='calendar' /></Text>
             <Text style={styles.DetailItem}> {this.props.event.eventHour} < Icon name='clock-o' /></Text>
             <Text style={styles.DetailItem}>{this.props.event.eventLocation} < Icon name='map-marker'/></Text>

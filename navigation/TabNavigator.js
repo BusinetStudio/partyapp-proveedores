@@ -1,19 +1,19 @@
 import React from 'react';
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import FirstScreen from '../screens/FirstScreen'
-import SecondScreen from '../screens/SecondScreen'
+import SolicitudesScreen from '../screens/SolicitudesScreen'
+import AceptadasScreen from '../screens/AceptadasScreen'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const TabStack = createBottomTabNavigator({
     Solicitudes:{
-       screen: FirstScreen,
+       screen: SolicitudesScreen,
        navigationOptions:{
          header:null
        }
      },
      Aceptados:{
-       screen: SecondScreen,
+       screen: AceptadasScreen,
        navigationOptions:{
          header:null
        }
