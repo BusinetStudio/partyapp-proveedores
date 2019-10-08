@@ -9,11 +9,47 @@ import {
   TextInput
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient'
-import styles from '../styles/styles';
 import Header from './Header'
+import Authentication from '../modules/authentication'
 
 export default class CambiarContrasenaScreen extends React.Component {
+  constructor(props) {
+    super(props);    
+    this.state = {
+      id: "",
+      contrasena : "",
+      contrasena2: "",
+    }
+  }
 
+  async componentDidMount()
+  {
+    Authentication.currentToken() .then((result) => {
+      this.setState({
+        id : result.id
+      })
+    })
+  }
+
+
+  async changePassword()
+  {
+      const { id, contrasena , contrasena2 } = this.state
+      if(contrasena === contrasena2)
+      {
+        const password = contrasena
+        Authentication.update({id , password})
+            .then((result) => {
+                if(result){
+                    alert("Actualizado con exito")
+                }else{
+                    alert("Error al intentar actualizar")
+                }
+        })
+      }else{
+        alert("Las contraseñas deben coincidir")
+      }
+  }
   render() {  
     return (
       <View style={{flex:1}}>
@@ -37,6 +73,7 @@ export default class CambiarContrasenaScreen extends React.Component {
           
           <View style={{alignItems:'center', marginTop: 30}}>
             <TouchableOpacity
+              onPress = {()=> this.changePassword()}
                 style={[estilo.button,{marginBottom:20}]} 
             >
                 <LinearGradient
@@ -52,7 +89,7 @@ export default class CambiarContrasenaScreen extends React.Component {
             </TouchableOpacity>
             <TouchableOpacity
                 style={[estilo.button,{marginBottom:20}]}
-                onPress={() => this.props.navigation.navigate('home')} 
+                onPress={() => this.props.navigation.navigate('Solicitudes')} 
             >
                 <View
                 style={[estilo.gradientButton, {backgroundColor: '#E9E9E9'}]}>

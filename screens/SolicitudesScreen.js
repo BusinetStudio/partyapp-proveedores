@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Text, Alert, View ,FlatList} from 'react-native';
+import { Text, RefreshControl, View ,FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'; 
 import HeaderTop from './Header';
 import EventItems from'./EventItem';
 import styles from '../styles/styles';
-
+import API from '../modules/eventos'
 
 
 const data = [{
@@ -86,16 +86,45 @@ export default class SolicitudesScreen extends Component {
 
   constructor(props){
     super(props)
-    //this.onPressDetail = this.onPressDetail.bind(this)
+    this.state = {
+      solicitudes : [],
+      isRefreshing : true
+    }
   }
 
-   _keyExtractor = (item, index) => item.eventName;
+  async componentDidMount()
+  {
+    this.props.navigation.addListener ('willFocus', () =>{
+      this.getSolicitudes()
+    })
+  }
+
+   _keyExtractor = (item, index) => item._id;
 
    separator = () => {
     return(
       <View style={{borderWidth:1,borderColor:"#e9e9e9"}}></View>
     )}
 
+    async getSolicitudes(){
+      this.setState( { isRefreshing : true})
+      API.getSolicitudes().then((result) =>{
+        this.setState({isRefreshing : false})
+        if(result && result.valid){
+          this.setState({
+            solicitudes : result.result
+          })
+        }
+      })
+    }
+
+  onPressItem(event , userId)
+  {
+    this.props.navigation.navigate("Pending",{
+      eventId : event,
+      userId : userId
+    })
+  }
 
   render (){
     return (
@@ -103,10 +132,17 @@ export default class SolicitudesScreen extends Component {
         <HeaderTop {...this.props} menu={true} ></HeaderTop>
         <Text style={styles.Title}>Listado de solicitudes</Text>
         <FlatList
-            data={data}
-            renderItem={({item}) => <EventItems {...this.props} event={item} onPress={'First'}/>}
+            data={this.state.solicitudes}
+            renderItem={({item}) => <EventItems eventId= {item._id} eventName={item.nombre} eventType={item.categoria} eventDate={item.fecha_del_evento} eventHour={item.hora_del_evento} eventLocation={item.distrito} userID={item.id_usuario} onPress={ (event , user) => this.onPressItem(event , user)}/>}
             keyExtractor={this._keyExtractor}
             ItemSeparatorComponent={this.separator}
+            refreshControl={
+              <RefreshControl
+                  refreshing={this.state.isRefreshing}
+                  onRefresh={() => this.getSolicitudes()}
+                  colors={["#C63275"]}
+               />
+            }
           />
 
       </View>

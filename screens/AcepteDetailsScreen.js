@@ -5,26 +5,50 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome'; ;
 import styles from '../styles/styles';
 import HeaderTop from '../screens/Header';
+import Eventos  from '../modules/eventos'
 
 export default class PendingDetails extends Component {
-
-  
   static navigationOptions = {
     header: null,
   };
+
+  constructor(props)
+  {
+    super(props)
+    this.state = {
+      eventType : "",
+      eventGuest : "",
+      eventDate : "",
+      eventHour : "",
+      eventLocation : "",
+      eventServices : []
+    }
+  }
+
+  async componentDidMount(){
+    this.props.navigation.addListener ('willFocus', () =>{
+      const id = this.props.navigation.getParam('eventId', '');  
+      Eventos.getFiesta({id}).then( (result) =>{
+        if( result && result.valid && result.result.length > 0) 
+        {
+          let cotizacion = result.result[0]
+          this.setState({
+            eventName: cotizacion.nombre,
+            eventType : cotizacion.categoria,
+            eventGuest : cotizacion.adultos + cotizacion.ninos,
+            eventDate : cotizacion.fecha_del_evento,
+            eventHour : cotizacion.hora_del_evento,
+            eventLocation : cotizacion.direccion,
+            eventServices: cotizacion.servicios_solicitados
+          })
+        }
+      })
+    })
+  }
+
   render() {  
     const { navigation } = this.props;
-    const eventName = navigation.getParam('eventName', '');
-    const eventType = navigation.getParam('eventType', '');
-    const eventGuest = navigation.getParam('eventGuest','');
-    const eventDate = navigation.getParam('eventDate','');
-    const eventHour = navigation.getParam('eventHour','');
-    const eventLocation = navigation.getParam('eventLocation','');
-    const eventAnimationTime= navigation.getParam('eventAnimationTime','');
-    const eventDescription= navigation.getParam('eventDescription','');
-    const eventQuantity= navigation.getParam('eventQuantity','');
-    const eventApproximateCost= navigation.getParam('eventApproximateCost','');
-    const eventAnimationDescription= navigation.getParam('eventAnimationDescription','');
+    const { eventName, eventType, eventGuest , eventDate, eventHour, eventLocation, eventServices} = this.state
     const clientName = navigation.getParam('clientName','');
     const clientPhone = navigation.getParam('clientPhone','');
     const clientMail = navigation.getParam('clientMail','');
@@ -35,16 +59,14 @@ export default class PendingDetails extends Component {
         <HeaderTop {...this.props} menu={false}></HeaderTop>
         <ScrollView>
           <View style={{marginBottom:40}}>
-            <Text style={[styles.Title, {marginBottom:20}]}>{eventName}</Text>
-            <Text style={styles.EventTitle}>{eventType}</Text>
-            <Text style={[styles.EventDescription, {fontWeight: '400'}]}>Invitados:{eventGuest}</Text>
+            <Text style={[styles.Title, {marginBottom:20}]}>{eventName ? eventName.toUpperCase() : ""}</Text>
+            <Text style={styles.EventTitle}>{eventType ? eventType.toUpperCase(): ""}</Text>
+            <Text style={[styles.EventDescription, {fontWeight: '400'}]}>Invitados: {eventGuest}</Text>
             <Text style={styles.EventDescription}>
-              < Icon name='calendar'style={styles.EventDescription}/> 
-              {eventDate}
+              < Icon name='calendar'style={styles.EventDescription}/> {" "+eventDate}
             </Text>
             <Text style={styles.EventDescription}>
-            < Icon name='clock-o' style={styles.EventDescription}/>
-              {eventHour}
+              < Icon name='clock-o' style={styles.EventDescription}/>{" "+eventHour}
             </Text>
             <Text style={styles.EventDescription}>
             < Icon name='map-marker' style={[styles.EventDescription, {marginLeft:37}]}/>

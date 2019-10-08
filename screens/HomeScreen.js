@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Image, StyleSheet, Text, TouchableOpacity, View, Button,Alert } from 'react-native';
-import { MonoText } from '../components/StyledText';
 import styles from '../styles/styles'; 
 
 

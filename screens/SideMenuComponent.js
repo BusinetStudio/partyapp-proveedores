@@ -3,10 +3,12 @@ import { Text, View, FlatList, TouchableOpacity, AsyncStorage,ScrollView, Image 
 import { NavigationActions } from 'react-navigation';
 import styles from '../styles/styles';
 import SideMenuHeader from './SideMenuHeaderComponent'
+import Authentication from '../modules/authentication'
+import EventEmitter from '../modules/eventEmiter'
 
 const sideMenuList = [
     {id: "1", name: 'Actualizar empresa', navigationName: 'ActualizarEmpresa'},
-    {id: "2", name: 'Cambiar Contrasena', navigationName: 'CambiarContrasena'},
+    {id: "2", name: 'Cambiar Contraseña', navigationName: 'CambiarContrasena'},
     {id: "3", name: 'Preguntas Frecuentes', navigationName: 'PreguntasFrecuentes'},
     {id: "4", name: 'Términos y Condiciones', navigationName: 'TerminosCondiciones'},
     {id: "5", name: 'Soporte', navigationName: 'Soporte'},
@@ -21,10 +23,20 @@ export default class SideMenuComponent extends Component{
         this.state = {
             username : 'Nombre de Usuario'
         }
+        this.eventRefresh = EventEmitter.addListener('refreshUser', () => {
+            this.refreshUser()
+          }
+        )
     }
 
-    componentDidMount(){
-        
+    async componentDidMount(){
+        await Authentication.currentToken().then((auth) => {
+            if (auth) {
+              this.setState({
+                  username: auth.nombreEmpresa
+              })
+            }
+        })
     }
 
     //navigation to screens from side menu
@@ -38,6 +50,16 @@ export default class SideMenuComponent extends Component{
     //sign out and clear all async storage
     async signOut() {
         this.props.navigation.navigate('Home')
+    }
+
+    async refreshUser(){
+        await Authentication.currentToken().then((auth) => {
+            if (auth) {
+              this.setState({
+                  username: auth.nombreEmpresa
+              })
+            }
+        })
     }
 
     render(){

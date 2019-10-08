@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Text, Alert, Image, TextInput, TouchableOpacity, View, Button } from 'react-native';
+import { Text, Alert, Image, TextInput, TouchableOpacity, View, KeyboardAvoidingView } from 'react-native';
 import styles from '../styles/styles'; 
-
+import Authentication from '../modules/authentication'
 
 export default class LoginScreen extends Component {
 
@@ -15,11 +15,19 @@ export default class LoginScreen extends Component {
     }
 
     onPressIngresar(){
-        this.props.navigation.navigate('Solicitudes');
+        const { username , password } = this.state;
+        Authentication.login({username,password})
+            .then((result) => {
+                if(result){
+                    this.props.navigation.navigate('Solicitudes');
+                }else{
+                    alert("Usuario o Contraseña Incorrecta")
+                }
+        })
     }
     render() {
         return (
-            <View style={styles.loginContainer}>
+            <KeyboardAvoidingView behavior="padding" style={styles.loginContainer}>
                 <Text style={styles.Title}>INICIO DE SESIÓN</Text>
                 <View>
                     <Text style={styles.SubTitle}>Ingresa tus datos</Text>
@@ -49,7 +57,7 @@ export default class LoginScreen extends Component {
                         </View>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }
