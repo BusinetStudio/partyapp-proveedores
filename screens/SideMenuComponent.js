@@ -49,6 +49,7 @@ export default class SideMenuComponent extends Component{
 
     //sign out and clear all async storage
     async signOut() {
+        AsyncStorage.clear()
         this.props.navigation.navigate('Home')
     }
 

@@ -1,6 +1,5 @@
 import React from 'react';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import SolicitudesScreen from '../screens/SolicitudesScreen'
 import AceptadasScreen from '../screens/AceptadasScreen'

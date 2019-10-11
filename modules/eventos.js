@@ -5,11 +5,15 @@ export default {
     async getSolicitudes () {
         let cotizaciones, data = {} , result, statusCode;
 		try {
-        data.servicios_solicitados = ["animacion","bebidas"]
-        cotizaciones = await Eventos.getSolicitudes(data)
-        statusCode = cotizaciones.status;
-        if(statusCode !== 200) return false;
-        result = await cotizaciones.json()
+            await Authentication.currentToken().then((auth) => {
+                if (auth) {
+                  data.servicios_solicitados = auth.servicios
+                }
+            })
+            cotizaciones = await Eventos.getSolicitudes(data)
+            statusCode = cotizaciones.status;
+            if(statusCode !== 200) return false;
+            result = await cotizaciones.json()
 		} catch (error) {
 			console.log(error)
 			result = false;

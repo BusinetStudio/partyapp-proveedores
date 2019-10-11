@@ -30,6 +30,8 @@ export default class ActualizarDatosScreen extends Component {
       distrito: '',
       id: '',
       token: '',
+      servicios: [],
+      privilege : "Proveedor"
     }
   }
 
@@ -45,7 +47,9 @@ export default class ActualizarDatosScreen extends Component {
         telefono : result.telefono ? result.telefono : '',
         celular: result.celular ? result.celular : '',
         direccion : result.direccion ? result.direccion : '',
-        distrito : result.distrito ? result.distrito : ''
+        distrito : result.distrito ? result.distrito : '',
+        servicios : result.servicios ? result.servicios : [],
+        privilege : "Proveedor"
       })
     })
   }
@@ -53,8 +57,8 @@ export default class ActualizarDatosScreen extends Component {
   async actualizar()
   {
     this.setState({ email:this.state.email.toLowerCase(),loading:true });
-    const { id, username, email, nombreEmpresa ,  direccion , distrito, telefono , celular , token} = this.state;
-    Authentication.update({id, username, email, nombreEmpresa ,  direccion , distrito, telefono , celular})
+    const { privilege , id, username, email, nombreEmpresa ,  direccion , distrito, telefono , celular , token , servicios} = this.state;
+    Authentication.update({privilege , id, username, email, nombreEmpresa ,  direccion , distrito, telefono , celular , servicios})
         .then(async (result) => {
             console.log(result)
             if(result){
@@ -69,7 +73,8 @@ export default class ActualizarDatosScreen extends Component {
                   direccion ,
                   distrito,
                   telefono,
-                  celular
+                  celular,
+                  servicios
               }
              await AsyncStorage.setItem('token', JSON.stringify(auth));
              EventEmitter.emit('refreshUser', true)

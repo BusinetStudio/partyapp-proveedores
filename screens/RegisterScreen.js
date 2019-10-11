@@ -18,20 +18,21 @@ export default class RegisterScreen extends Component {
             companyName :'',
             address: '',
             distric: '',
-            phoneNumber : ''
+            phoneNumber : '',
+            privilege : "Proveedor"
         }
     }
 
     async onPressRegistrarse(){
         this.setState({ email:this.state.email.toLowerCase(),loading:true });
-        const { username, email , password } = this.state;
+        const { username, email , password,privilege } = this.state;
         const nombreCompleto = this.state.fullname;
         const direccion = this.state.address;
         const distrito = this.state.distric;
         const telefono = this.state.phoneNumber;
         const nombreEmpresa = this.state.companyName;
 
-        Authentication.register({username,email,password,nombreCompleto,direccion,distrito,telefono,nombreEmpresa})
+        Authentication.register({privilege, username,email,password,nombreCompleto,direccion,distrito,telefono,nombreEmpresa})
             .then((result) => {
                 if(result){
                     alert("Registrado con exito")
