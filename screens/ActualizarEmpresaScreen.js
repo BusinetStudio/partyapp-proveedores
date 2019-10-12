@@ -24,10 +24,10 @@ export default class ActualizarDatosScreen extends Component {
       username : '',
       nombreEmpresa: '',
       email: '' ,
-      telefono : '',
+      telefonoEmpresa : '',
       celular: '',
-      direccion: '',
-      distrito: '',
+      direccionEmpresa: '',
+      distritoEmpresa: '',
       id: '',
       token: '',
       servicios: [],
@@ -44,10 +44,10 @@ export default class ActualizarDatosScreen extends Component {
         username : result.username ? result.username : '',
         nombreEmpresa: result.nombreEmpresa ? result.nombreEmpresa: '',
         email : result.email ? result.email : '',
-        telefono : result.telefono ? result.telefono : '',
+        telefonoEmpresa : result.telefonoEmpresa ? result.telefonoEmpresa : '',
         celular: result.celular ? result.celular : '',
-        direccion : result.direccion ? result.direccion : '',
-        distrito : result.distrito ? result.distrito : '',
+        direccion : result.direccionEmpresa ? result.direccionEmpresa : '',
+        distrito : result.distritoEmpresa ? result.distritoEmpresa : '',
         servicios : result.servicios ? result.servicios : [],
         privilege : "Proveedor"
       })
@@ -57,8 +57,8 @@ export default class ActualizarDatosScreen extends Component {
   async actualizar()
   {
     this.setState({ email:this.state.email.toLowerCase(),loading:true });
-    const { privilege , id, username, email, nombreEmpresa ,  direccion , distrito, telefono , celular , token , servicios} = this.state;
-    Authentication.update({privilege , id, username, email, nombreEmpresa ,  direccion , distrito, telefono , celular , servicios})
+    const { privilege , id, username, email, nombreEmpresa ,  direccionEmpresa , distritoEmpresa, telefonoEmpresa , celular , token , servicios} = this.state;
+    Authentication.update({privilege , id, username, email, nombreEmpresa ,  direccionEmpresa , distritoEmpresa, telefonoEmpresa , celular , servicios})
         .then(async (result) => {
             console.log(result)
             if(result){
@@ -70,9 +70,9 @@ export default class ActualizarDatosScreen extends Component {
                   token,
                   email,
                   nombreEmpresa ,
-                  direccion ,
-                  distrito,
-                  telefono,
+                  direccionEmpresa ,
+                  distritoEmpresa,
+                  telefonoEmpresa,
                   celular,
                   servicios
               }
@@ -120,8 +120,8 @@ export default class ActualizarDatosScreen extends Component {
           <TextInput 
             style={styles.inputElement}
             placeholder='Teléfono' 
-            value = {this.state.telefono}
-            onChangeText={(telefono) => this.setState({telefono})}
+            value = {this.state.telefonoEmpresa}
+            onChangeText={(telefonoEmpresa) => this.setState({telefonoEmpresa})}
             keyboardType = 'numeric'
           />
           <TextInput 
@@ -134,14 +134,14 @@ export default class ActualizarDatosScreen extends Component {
           <TextInput 
             style={styles.inputElement}
             placeholder='Direccion' 
-            value={this.state.direccion}
-            onChangeText={(direccion) => this.setState({direccion})}
+            value={this.state.direccionEmpresa}
+            onChangeText={(direccionEmpresa) => this.setState({direccionEmpresa})}
           />
           <View style={{marginTop: -20,marginHorizontal:40}}>
             <Dropdown
               label='Seleccionar distrito'
-              value={this.state.distrito}
-              onChangeText={(distrito) => this.setState({distrito})}
+              value={this.state.distritoEmpresa}
+              onChangeText={(distritoEmpresa) => this.setState({distritoEmpresa})}
               data={arrayDistritos}
             />
           </View>

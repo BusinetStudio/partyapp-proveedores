@@ -21,6 +21,8 @@ export default {
           body: JSON.stringify(data),
           headers: headers
       }
+      console.log(data,"data")
+      console.log(`${server}/api/users/login`)
       return fetch(`${server}/api/users/login`, config) 
     },
     async update(data)
