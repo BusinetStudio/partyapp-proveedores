@@ -43,7 +43,8 @@ export default class PendingDetailsScreen extends Component {
             eventDate : cotizacion.fecha_del_evento,
             eventHour : cotizacion.hora_del_evento,
             eventLocation : cotizacion.direccion,
-            eventServices: cotizacion.servicios_solicitados
+            eventServices: cotizacion.servicios_solicitados,
+            eventServicesDetails : cotizacion.servicios
           })
         }
       })
@@ -67,8 +68,9 @@ export default class PendingDetailsScreen extends Component {
       if(value)
       {
         cotizacion.push({
-          servicio: eventServices[key],
-          costo: value
+          [eventServices[key]]:{
+            costo: value
+          }
         })
       }
     }
@@ -84,14 +86,7 @@ export default class PendingDetailsScreen extends Component {
   }
 
   render() {  
-    const { eventName, eventType, eventGuest , eventDate, eventHour, eventLocation, eventServices} = this.state
-    const eventAnimationTime= "";
-    const eventDescription= "";
-    const eventQuantity= "";
-    const eventApproximateCost="";
-    const eventAnimationDescription="";
-    //const otherParam = navigation.getParam('otherParam', 'some default value');
-
+    const { eventName, eventType, eventGuest , eventDate, eventHour, eventLocation, eventServices , eventServicesDetails} = this.state
     return (
       <View>
         <HeaderTop {...this.props} menu={false} ></HeaderTop>
@@ -113,13 +108,13 @@ export default class PendingDetailsScreen extends Component {
           </View>
           <FlatList data={eventServices} 
             keyExtractor={(item, index) => index.toString()}
-            renderItem={({item}) => {
+            renderItem={({item , index}) => {
               return(
                 <KeyboardAvoidingView behavior="padding" enabled>
                   <View>
                     <Text style={styles.EventTitle}>{item}</Text>
-                    <Text style={styles.EventDescription}>Duración: </Text>
-                    <Text style={styles.EventDescription}>Descripción:</Text>
+                    <Text style={styles.EventDescription}>Duración: {eventServicesDetails[index][item].duracion}</Text>
+                    <Text style={styles.EventDescription}>Descripción: {eventServicesDetails[index][item].detalles}</Text>
                     <Text style={styles.EventDescriptionParagraf}></Text>
                   </View>
                   <View>
